@@ -16,7 +16,7 @@ export default TopBar = () => {
     return <>
         <StatusBar barStyle="light-content" />
         <Box safeAreaTop bg="#785f7e" />
-        <HStack bg={COLORS.primary} px="5" py="3" justifyContent="space-between" alignItems="center" w="100%">
+        <HStack bg={COLORS.primary} px="3" py="3" justifyContent="space-between" alignItems="center" w="100%">
             <HStack alignItems="center">
                 <Text color="white" fontSize="20" fontWeight="bold">
                     Hey Fred!

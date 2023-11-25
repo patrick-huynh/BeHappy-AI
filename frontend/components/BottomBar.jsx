@@ -40,6 +40,7 @@ export default BottomBar = () => {
       <HStack bg={COLORS.primary} alignItems="center" safeAreaBottom py="5">
         {content.map(({ icon, title }, idx) => (
           <Pressable
+            key={idx}
             cursor="pointer"
             opacity={selected === idx ? 1 : 0.5}
             py="3"
@@ -52,10 +53,10 @@ export default BottomBar = () => {
                 as={
                   <MaterialCommunityIcons
                     name={selected === idx ? icon : `${icon}-outline`}
-                  />
+                    />
                 }
                 color="white"
-                size="sm"
+                size="md"
               />
               <Text color="white" fontSize="12">
                 {title}
