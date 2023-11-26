@@ -13,49 +13,40 @@ import {
   Text,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native";
+
+import registerNNPushToken from 'native-notify';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import TopBar from "./components/TopBar";
 import BottomBar from "./components/BottomBar";
 import Home from "./components/Home";
 import { COLORS } from "./constants/theme";
+import Responses from "./pages/Responses";
 
-function UseColorMode() {
-  const { toggleColorMode } = useColorMode();
-  const text = useColorModeValue("Light", "Dark");
-  const bg = useColorModeValue("warmGray.50", "coolGray.800");
-  return (
-    <Center>
-      <Box p="4" flex="1" bg={bg} maxW="300" w="100%" mt={10} safeArea>
-        <Text fontSize="lg" display="flex" mb={20}>
-          The active color mode is{" "}
-          <Text bold fontSize="18px">
-            {text}
-          </Text>
-        </Text>
-        <Button onPress={toggleColorMode} h={10}>
-          Toggle
-        </Button>
-      </Box>
-    </Center>
-  );
-}
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [showPrompt, setShowPrompt] = useState(false);
-
+  registerNNPushToken(15354, 'OMR5vhsELb5y4OPcmOkK9z');
   return (
-    <NativeBaseProvider>
-      <Box width="100%" height="100%" bg={COLORS.tertiary}>
-        <TopBar />
-        <Box height="72%">
-          {showPrompt ? (
-            <Prompt setShowPrompt={setShowPrompt} />
-          ) : (
-            <Home setShowPrompt={setShowPrompt} />
-          )}
+    <NavigationContainer>
+      <NativeBaseProvider>
+        <Box width="100%" height="100%" bg={COLORS.tertiary}>
+          <TopBar />
+          <Box height="72%">
+            <Stack.Navigator>
+              {showPrompt ? (
+                <Prompt setShowPrompt={setShowPrompt} />
+              ) : (
+                <Home setShowPrompt={setShowPrompt} />
+              )}
+              <Stack.Screen name="Responses" component={Responses} />
+            </Stack.Navigator>
+          </Box>
+          <BottomBar />
         </Box>
-        <BottomBar />
-      </Box>
-    </NativeBaseProvider>
-  );
+      </NativeBaseProvider>
+    </NavigationContainer >
+  )
 }
