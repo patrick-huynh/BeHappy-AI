@@ -10,7 +10,7 @@ exports.generatePrompt = asyncHandler(async (req, res) => {
     temperature: 0,
     max_tokens: 1000,
     providers: "google",
-    text: "Create a prompt in a constructive matterm to encourage and ask the user about things like their day. Try to sound caring and promote affirmation ",
+    text: "Create a prompt in a constructive manner to encourage introspective and ask the user about eventful things occuring in their day. Try to sound caring and promote affirmation.",
   };
 
   const response = await axios.post(process.env.API_URL, requestData, {
@@ -38,7 +38,9 @@ exports.generateText = asyncHandler(async (req, res) => {
     temperature: 0,
     max_tokens: 1000,
     providers: "google",
-    text: req.body.text,
+    text:
+      "Pretend you're a therapist and create a counselling response to the following sentence. Focus on the positive things and provide validation where necessary: " +
+      req.body.text,
   };
 
   const response = await axios.post(process.env.API_URL, requestData, {
@@ -49,7 +51,8 @@ exports.generateText = asyncHandler(async (req, res) => {
     },
   });
 
-  const generatedText = response.data[requestData.providers].generated_text;
+  const generatedText =
+    response.data[requestData.providers].generated_text.trim();
 
   res.status(200).json({ generatedText });
 });

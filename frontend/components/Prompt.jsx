@@ -59,7 +59,9 @@ export default Prompt = ({ navigation }) => {
         text: input,
       });
 
-      navigation.navigate("Feedback", {feedbackText: response.data.generatedText})
+      navigation.navigate("Feedback", {
+        feedbackText: response.data.generatedText,
+      });
     } catch (e) {
       console.log("Error: ", e);
     }
@@ -73,7 +75,7 @@ export default Prompt = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
         <Box h="100%" w="80%" alignSelf="center">
-          <Heading pt="10" pb="5">
+          <Heading pt="10" pb="5" color={COLORS.primary}>
             {/* Type of prompt question goes here */}
             Story Time!
           </Heading>
