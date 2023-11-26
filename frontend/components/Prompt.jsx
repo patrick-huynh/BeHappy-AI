@@ -10,6 +10,7 @@ import {
   FormControl,
   View,
   Pressable,
+  Alert,
 } from "native-base";
 import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { COLORS } from "../constants/theme";
@@ -18,6 +19,7 @@ import { card_styles } from "./Card/card_styles";
 export default Prompt = () => {
   const [input, setInput] = useState("");
   const [prompt, setPrompt] = useState("");
+  const [popUpMessage, setPopUpMessage] = useState("");
 
   useEffect(() => {
     axios.post("http://172.23.35.171:8080/api/prompt").then((response) => {
@@ -29,8 +31,18 @@ export default Prompt = () => {
     setInput(newText);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
+    await axios.post("http://172.23.35.171:8080/api/submit", {
+      text: input,
+    });
+    // .then((response) => {
+    //   console.log(response.data);
+    // });
+
+    let response = await axios.post("http://172.23.35.171:8080/api/text", {
+      text: input,
+    });
+    setPopUpMessage(response.data.generatedText);
   };
 
   return (
