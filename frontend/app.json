@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.p23huynh.frontend"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +26,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f6542762-904f-45ee-8ad7-b11a7e1cb02f"
+      }
     }
   }
 }
