@@ -40,7 +40,9 @@ import { COLORS } from "./constants/theme";
 import Responses from "./pages/Responses";
 import Feedback from "./components/Feedback";
 
+
 const Stack = createNativeStackNavigator();
+
 
 export default function App() {
   registerNNPushToken(15354, "OMR5vhsELb5y4OPcmOkK9z");
