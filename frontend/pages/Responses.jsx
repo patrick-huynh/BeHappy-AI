@@ -1,57 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { View, Heading, ScrollView } from "native-base";
+import { View, ScrollView } from "native-base";
 
 import Card from "../components/Card/Card";
 
-const userResponses = [
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-];
-
 export default Responses = () => {
-  const [responses, setResponses] = useState([]);
+  const [userResponses, setUserResponses] = useState([]);
 
   useEffect(() => {
-    axios.get("http://172.23.35.171:8080/api/responses").then((response) => {
-      setResponses(response.data);
+    axios.get(`${BASE_URL}/api/responses`).then((response) => {
+      setUserResponses(response.data);
     });
   }, []);
 
   return (
-    <ScrollView>
-      <View alignItems="center"></View>
-      {responses.map((response) => {
+    <ScrollView h="100%">
+      {userResponses.map(({createdAt, text}) => {
         return (
           <Card
-            header={"Story Time"}
-            subheader={response.createdAt}
-            body={response.text}
+            header={"📚 Story Time"}
+            subheader={createdAt.substring(0, 10)}
+            body={text}
           />
         );
       })}
-      {/* {userResponses.map(({ type, text, timestamp }) => {
-        return <Card header={type} subheader={timestamp} body={text} />;
-      })} */}
     </ScrollView>
   );
 };

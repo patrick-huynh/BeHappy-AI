@@ -11,19 +11,38 @@ import {
   View,
   Pressable,
   Alert,
+  Spinner,
+  HStack,
 } from "native-base";
 import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { COLORS } from "../constants/theme";
 import { card_styles } from "./Card/card_styles";
 
+import BASE_URL from "../config"
+
+const Loading = () => {
+  return (
+    <View mt="70%">
+      <HStack space={2} justifyContent="center">
+        <Spinner accessibilityLabel="Loading posts" color={COLORS.primary} />
+        <Heading color={COLORS.primary} fontSize="md">
+          Loading
+        </Heading>
+      </HStack>
+    </View>
+  );
+};
+
 export default Prompt = () => {
   const [input, setInput] = useState("");
   const [prompt, setPrompt] = useState("");
   const [popUpMessage, setPopUpMessage] = useState("");
+  const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
-    axios.post("http://172.23.35.171:8080/api/prompt").then((response) => {
+    axios.post(`${BASE_URL}/api/prompt`).then((response) => {
       setPrompt(response.data.generatedText);
+      setShowLoading(false);
     });
   }, []);
 
@@ -32,18 +51,19 @@ export default Prompt = () => {
   };
 
   const handleSubmit = async () => {
-    await axios.post("http://172.23.35.171:8080/api/submit", {
+    await axios.post(`${BASE_URL}/api/submit`, {
       text: input,
     });
-    // .then((response) => {
-    //   console.log(response.data);
-    // });
 
-    let response = await axios.post("http://172.23.35.171:8080/api/text", {
+    let response = await axios.post(`${BASE_URL}/api/text`, {
       text: input,
     });
     setPopUpMessage(response.data.generatedText);
   };
+
+  if (showLoading) {
+    return <Loading />;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
