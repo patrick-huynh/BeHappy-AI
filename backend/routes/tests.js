@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 // import controllers
-const { generatePrompt, generateText } = require("../controllers/test");
+const {
+  generatePrompt,
+  generateText,
+  setResponse,
+  getResponses,
+} = require("../controllers/tests");
 
 // import middlewares
 
@@ -10,5 +15,7 @@ const { generatePrompt, generateText } = require("../controllers/test");
 
 router.post("/prompt", generatePrompt);
 router.post("/text", generateText);
+router.post("/submit", setResponse);
+router.get("/responses", getResponses);
 
 module.exports = router;
