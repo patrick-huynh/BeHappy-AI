@@ -1,0 +1,87 @@
+import React, { useState } from "react";
+import {
+  NativeBaseProvider,
+  Text,
+  Center,
+  Box,
+  Divider,
+  Flex,
+  VStack,
+  ScrollView,
+  Heading,
+  View,
+  Image,
+  Slider,
+} from "native-base";
+import { Pressable } from "react-native";
+import Prompt from "./Prompt";
+
+export default Home = ({ setShowPrompt }) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const today = new Date();
+  const month = today.getMonth();
+  const year = today.getFullYear();
+  const date = today.getDate();
+  const currentDate = monthNames[month] + " " + date + ", " + year;
+
+  const [streak, setStreak] = useState(21); // 21 is for demo purposes
+  const [onChangeValue, setOnChangeValue] = useState(70);
+
+  return (
+    <Box width="100%" height="100%" bg="white">
+      <Center _text={{ color: "white" }}>
+        <Heading pt="10" pb="5">
+          {currentDate}
+        </Heading>
+        <Divider
+          w="60%"
+          my="2"
+          _light={{ bg: "muted.800" }}
+          _dark={{ bg: "muted.50" }}
+        />
+        <View w="60%" alignItems="flex-end">
+          <Text>Streak: {streak} </Text>
+        </View>
+        <Image
+          height="400"
+          width="400"
+          source={require("../assets/thinking.png")}
+          alt="thinking-bubble"
+        />
+        <Text>{onChangeValue}</Text>
+        <Slider
+          w="3/4"
+          default={onChangeValue}
+          onChange={(v) => {
+            if (Math.floor(v) == 100) {
+              setShowPrompt(true);
+            }
+            setOnChangeValue(Math.floor(v));
+          }}
+          minValue={0}
+          maxValue={100}
+          step={5}
+        >
+          <Slider.Track>
+            <Slider.FilledTrack />
+          </Slider.Track>
+          <Slider.Thumb />
+        </Slider>
+      </Center>
+    </Box>
+  );
+};
