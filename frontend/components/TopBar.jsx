@@ -19,7 +19,7 @@ export default TopBar = () => {
         <HStack bg={COLORS.primary} px="3" py="3" justifyContent="space-between" alignItems="center" w="100%">
             <HStack alignItems="center">
                 <Text color="white" fontSize="20" fontWeight="bold">
-                    Hey Fred!
+                    👋 Hey Fred!
                 </Text>
             </HStack>
             <HStack>

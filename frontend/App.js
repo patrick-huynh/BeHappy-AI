@@ -22,6 +22,7 @@ import BottomBar from "./components/BottomBar";
 import Home from "./components/Home";
 import { COLORS } from "./constants/theme";
 import Responses from "./pages/Responses";
+import Feedback from "./components/Feedback";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,9 @@ export default function App() {
                 component={Responses}
                 options={{ gestureEnabled: false, animation: "none" }}
               />
+              <Stack.Screen name="Feedback" component={Feedback} options={{
+                presentation: "modal"
+              }}/>
             </Stack.Navigator>
           </Box>
           <BottomBar />

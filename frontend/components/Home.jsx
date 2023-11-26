@@ -17,6 +17,7 @@ import {
 } from "native-base";
 import { Pressable } from "react-native";
 import Prompt from "./Prompt";
+import { COLORS } from "../constants/theme"
 
 export default Home = ({ navigation }) => {
   const monthNames = [
@@ -51,8 +52,9 @@ export default Home = ({ navigation }) => {
         </Heading>
         <Divider
           w="60%"
-          my="2"
-          _light={{ bg: "muted.800" }}
+          mb="2"
+          thickness={4}
+          _light={{ bg: COLORS.primary }}
           _dark={{ bg: "muted.50" }}
         />
         <View w="60%" alignItems="flex-end">

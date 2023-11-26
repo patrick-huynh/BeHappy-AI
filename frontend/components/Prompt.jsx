@@ -18,7 +18,7 @@ import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { COLORS } from "../constants/theme";
 import { card_styles } from "./Card/card_styles";
 
-import BASE_URL from "../config"
+import BASE_URL from "../config";
 
 const Loading = () => {
   return (
@@ -33,10 +33,9 @@ const Loading = () => {
   );
 };
 
-export default Prompt = () => {
+export default Prompt = ({ navigation }) => {
   const [input, setInput] = useState("");
   const [prompt, setPrompt] = useState("");
-  const [popUpMessage, setPopUpMessage] = useState("");
   const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
@@ -51,14 +50,19 @@ export default Prompt = () => {
   };
 
   const handleSubmit = async () => {
-    await axios.post(`${BASE_URL}/api/submit`, {
-      text: input,
-    });
+    try {
+      await axios.post(`${BASE_URL}/api/submit`, {
+        text: input,
+      });
 
-    let response = await axios.post(`${BASE_URL}/api/text`, {
-      text: input,
-    });
-    setPopUpMessage(response.data.generatedText);
+      let response = await axios.post(`${BASE_URL}/api/text`, {
+        text: input,
+      });
+
+      navigation.navigate("Feedback", {feedbackText: response.data.generatedText})
+    } catch (e) {
+      console.log("Error: ", e);
+    }
   };
 
   if (showLoading) {

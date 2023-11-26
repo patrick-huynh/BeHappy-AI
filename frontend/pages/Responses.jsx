@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { View, ScrollView } from "native-base";
-
+import { ScrollView } from "native-base";
 import Card from "../components/Card/Card";
+
 
 export default Responses = () => {
   const [userResponses, setUserResponses] = useState([]);
@@ -16,9 +16,10 @@ export default Responses = () => {
 
   return (
     <ScrollView h="100%">
-      {userResponses.map(({createdAt, text}) => {
+      {userResponses.map(({createdAt, text}, idx) => {
         return (
           <Card
+            key={idx}
             header={"📚 Story Time"}
             subheader={createdAt.substring(0, 10)}
             body={text}
