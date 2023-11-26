@@ -13,11 +13,26 @@ import {
   Text,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native";
 
 import registerNNPushToken from 'native-notify';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { SafeAreaView } from "react-native";
+import {
+  NativeBaseProvider,
+  Box,
+  useColorMode,
+  useColorModeValue,
+  Center,
+  Button,
+  StatusBar,
+  HStack,
+  IconButton,
+  Icon,
+  Text,
+} from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import TopBar from "./components/TopBar";
 import BottomBar from "./components/BottomBar";
@@ -28,9 +43,12 @@ import Responses from "./pages/Responses";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [showPrompt, setShowPrompt] = useState(false);
   registerNNPushToken(15354, 'OMR5vhsELb5y4OPcmOkK9z');
+
   return (
     <NavigationContainer>
+
       <NativeBaseProvider>
         <Box width="100%" height="100%" bg={COLORS.tertiary}>
           <TopBar />
@@ -48,5 +66,5 @@ export default function App() {
         </Box>
       </NativeBaseProvider>
     </NavigationContainer >
-  )
+  );
 }
