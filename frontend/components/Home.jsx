@@ -12,11 +12,13 @@ import {
   View,
   Image,
   Slider,
+  Entypo,
+  Icon
 } from "native-base";
 import { Pressable } from "react-native";
 import Prompt from "./Prompt";
 
-export default Home = ({ setShowPrompt }) => {
+export default Home = ({ navigation }) => {
   const monthNames = [
     "January",
     "February",
@@ -39,7 +41,7 @@ export default Home = ({ setShowPrompt }) => {
   const currentDate = monthNames[month] + " " + date + ", " + year;
 
   const [streak, setStreak] = useState(21); // 21 is for demo purposes
-  const [onChangeValue, setOnChangeValue] = useState(70);
+  const [onChangeValue, setOnChangeValue] = useState(0);
 
   return (
     <Box width="100%" height="100%" bg="white">
@@ -65,16 +67,19 @@ export default Home = ({ setShowPrompt }) => {
         <Text>{onChangeValue}</Text>
         <Slider
           w="3/4"
-          default={onChangeValue}
+          value={onChangeValue}
           onChange={(v) => {
             if (Math.floor(v) == 100) {
-              setShowPrompt(true);
+              navigation.navigate("Prompt");
+              setOnChangeValue(0);
+              return;
             }
             setOnChangeValue(Math.floor(v));
           }}
           minValue={0}
           maxValue={100}
-          step={5}
+          step={1}
+          size="lg"
         >
           <Slider.Track>
             <Slider.FilledTrack />

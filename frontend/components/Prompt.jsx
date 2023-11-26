@@ -8,56 +8,54 @@ import {
   Button,
   FormControl,
   View,
-  //   Keyboard,
+  Pressable,
 } from "native-base";
 import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { COLORS } from "../constants/theme";
+import { card_styles } from "./Card/card_styles";
 
 export default Prompt = () => {
-  Keyboard.dismiss();
   const [input, setInput] = useState("");
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    setInput(event.target.value);
+  const handleChange = (newText) => {
+    setInput(newText);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Successfully Submitted");
+    console.log("Successfully Submitted", input);
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
-        <Box h="100%" w="100%">
-          <Center>
-            <Heading w="70%" pt="10" pb="5">
-              {/* Type of prompt question goes here */}
-              Story Time!
-            </Heading>
-            {/* The prompt question goes here */}
-            <Text w="70%">Tell us about your day C:</Text>
-            <FormControl>
-              <TextArea
-                w="70%"
-                h="50%"
-                mx="auto"
-                my="10"
-                placeholder="Answer here."
-                value={input}
-                onChange={handleChange}
-              ></TextArea>
-            </FormControl>
-            <Text color="red.500">{input}</Text>
-            <Button rounded={15} onSubmit={handleSubmit}>
-              <Text color="white" px="5" py="2">
+        <Box h="100%" w="80%" alignSelf="center">
+          <Heading pt="10" pb="5">
+            {/* Type of prompt question goes here */}
+            Story Time!
+          </Heading>
+          {/* The prompt question goes here */}
+          <Text>Tell us about your day C:</Text>
+          <FormControl>
+            <TextArea
+              h="40%"
+              mx="auto"
+              my="10"
+              placeholder="Answer here."
+              value={input}
+              onChangeText={handleChange}
+              style={card_styles.card}
+            ></TextArea>
+          </FormControl>
+            <Button rounded={15} onPress={handleSubmit} bg={COLORS.primary} variant="unstyled"
+            >
+              <Text fontWeight="bold" color="white" px="5" py="2">
                 Submit
               </Text>
             </Button>
-            <Button pt="5" variant="ghost" colorScheme="success">
+            <Pressable alignSelf="center" mt="5" variant="ghost" onPress={() => setInput("")}>
               <Text color="gray.500">Clear</Text>
-            </Button>
-          </Center>
+            </Pressable>
         </Box>
       </View>
     </TouchableWithoutFeedback>
