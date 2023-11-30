@@ -1,41 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-import { View, Heading, ScrollView } from "native-base";
-import { SafeAreaView } from "react-native";
-
+import { ScrollView } from "native-base";
 import Card from "../components/Card/Card";
 
-const userResponses = [
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-  {
-    type: "📚 Story Time",
-    text: "I woke up and stubbed my toe. I hit a car on the way to work. But I hit a new bench PR today.",
-    timestamp: "12:12:12 AM",
-  },
-];
 
 export default Responses = () => {
+  const [userResponses, setUserResponses] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/api/responses`).then((response) => {
+      setUserResponses(response.data);
+    });
+  }, []);
+
   return (
-      <ScrollView>
-        <View alignItems="center">
-        </View>
-        {userResponses.map(({ type, text, timestamp }) => {
-          return <Card header={type} subheader={timestamp} body={text} />;
-        })}
-      </ScrollView>
+    <ScrollView h="100%">
+      {userResponses.map(({createdAt, text}, idx) => {
+        return (
+          <Card
+            key={idx}
+            header={"📚 Story Time"}
+            subheader={createdAt.substring(0, 10)}
+            body={text}
+          />
+        );
+      })}
+    </ScrollView>
   );
 };

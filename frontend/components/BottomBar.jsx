@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   NativeBaseProvider,
   Box,
@@ -17,6 +17,10 @@ import {
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { COLORS } from "../constants/theme";
 
+import { createNavigationContainerRef } from '@react-navigation/native';
+
+export const navigationRef = createNavigationContainerRef()
+
 const content = [
   {
     icon: "home",
@@ -24,15 +28,19 @@ const content = [
   },
   {
     icon: "message",
-    title: "My Responses",
+    title: "Responses",
   },
 ];
 
 export default BottomBar = () => {
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(0);
+
+  navigationRef.addListener('state', (event) => {
+    setSelected(event.data.state?.index || 0);
+  })
 
   const handleSectionChange = (idx) => {
-    setSelected(idx);
+    navigationRef.navigate(content[idx].title);
   };
 
   return (

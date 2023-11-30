@@ -10,7 +10,6 @@ export default Card = ({ header, subheader, body, footer }) => {
     <Box
       alignSelf="center"
       my={3}
-      h="20%"
       w="90%"
       border="1"
       borderRadius="3xl"
