@@ -1,37 +1,13 @@
-import React, { useState } from "react";
-import {
-  NativeBaseProvider,
-  Box,
-  useColorMode,
-  useColorModeValue,
-  Center,
-  Button,
-  StatusBar,
-  HStack,
-  IconButton,
-  Icon,
-  Text,
-} from "native-base";
+import React from "react";
 import registerNNPushToken from "native-notify";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { navigationRef } from "./components/BottomBar";
 
-import { SafeAreaView } from "react-native";
 import {
   NativeBaseProvider,
   Box,
-  useColorMode,
-  useColorModeValue,
-  Center,
-  Button,
-  StatusBar,
-  HStack,
-  IconButton,
-  Icon,
-  Text,
 } from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
 
 import TopBar from "./components/TopBar";
 import BottomBar from "./components/BottomBar";
