@@ -32,10 +32,12 @@ BeHappy AI requires a couple of depencdencies
    Run `npm i` once intially to install the packages
 
 2. **expo**
-   The package uses expo for mobile development, so you need to install it on the AppStore of your respective device. Follow this tutorial 
-   [here](https://docs.expo.dev/get-started/expo-go/) for more information
+   The project uses expo for mobile development, so you need to install it on the AppStore of your respective device. Follow this tutorial [here](https://docs.expo.dev/get-started/expo-go/) for more information
    
    Run `npm install expo` to install expo.
+
+4. **Eden AI**
+   We use Eden AI text generation for prompts and responses, create a free account and use the sandbox key in the environment variable below.
    
 
 ## Configuration
