@@ -1,1 +1,2 @@
-export default BASE_URL = "http:/172.23.32.255:8080";
+const IP = "192.168.2.15"
+export default BASE_URL = `http:/${IP}:8080`;
