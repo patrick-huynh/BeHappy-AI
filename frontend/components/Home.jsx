@@ -12,11 +12,10 @@ import {
   View,
   Image,
   Slider,
-  Entypo,
   Icon,
   IconButton,
 } from "native-base";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons, FontAwesome, Entypo } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import Prompt from "./Prompt";
 import { COLORS } from "../constants/theme";
@@ -124,13 +123,11 @@ export default Home = ({ navigation }) => {
           <Slider.Track>
             <Slider.FilledTrack bg={COLORS.secondary} />
           </Slider.Track>
-          <Slider.Thumb>
-            <Icon
-              as={Ionicons}
-              name="heart"
-              color="red"
-              size="6"
-              // mr="1"
+          <Slider.Thumb bg="white" size={10}>
+            <Entypo
+              name="arrow-with-circle-right"
+              color={COLORS.secondary}
+              size={40}
             />
           </Slider.Thumb>
         </Slider>
